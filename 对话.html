@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <style>
+            *{
+                margin: 0px;
+                padding: 0px;
+            }
+            .test{
+                height: 300px;
+                width: 500px;
+                border-radius: 50%;
+                border: solid 1px;
+                text-align: center;
+                font: 50px/300px 楷体;
+                position: relative;
+            }
+            .test::before{
+                position: absolute;
+                display: block;
+                width: 100px;
+                height: 100px;
+                content: "";
+                right: -60px;
+                bottom: -60px;
+                border: 1px solid;
+                border-radius: 50%;
+            }
+            .test::after{
+                border-radius: 50%;
+                border: 1px solid;
+                position: absolute;
+                right: -150px;
+                bottom: -150px;
+                display: block;
+                width: 80px;
+                height: 80px;
+                content: "";
+            }
+        </style>
+    </head>
+    <body>
+        <div class="test">
+            入坑前端，就是大坑
+        </div>
+        <div class="bubble1"></div>
+        <div class="bubble2"></div>
+    </body>
+</html>

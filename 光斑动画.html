@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <style>
+            *{
+                margin: 0px;
+                padding: 0px;
+            }
+            body,html{
+                height: 100%;
+                text-align: center;
+                background-color: black;
+            }
+            h1{
+                display: inline-block;                
+                margin: 50px;
+                height: 300px;
+                font: bold 100px 微软雅黑;
+                color: rgba(255, 255, 255, 0.5);
+                background: no-repeat linear-gradient(110deg,rgba(255,255,255,0) 100px, rgba(255,255,255,1) 180px, rgba(255,255,255,0) 260px);
+                -webkit-background-clip: text;
+                /* transition: 3s; */
+            }
+            /* h1:hover{
+                background-position: 500px 0;
+            } */
+        </style>
+    </head>
+    <body>
+        <h1>今天来暨南大学走一圈</h1>
+        <script>
+            var h1 = document.querySelector("h1");
+            var flag = -160;
+            setInterval(() => {
+                flag += 10;
+                if(flag == 900) {
+                    flag = -160;
+                }
+                h1.style.backgroundPositionX = flag + "px";
+            }, 1000/60);
+        </script>
+    </body>
+</html>

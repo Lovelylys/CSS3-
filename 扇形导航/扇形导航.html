@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <style>
+            *{
+                margin: 0px;
+                padding: 0px;
+            }
+            html,body{
+                height: 100%;
+                overflow: hidden;
+            }
+            #wrap{
+                width: 50px;
+                height: 50px;
+                position: fixed;
+                right: 5px;
+                bottom: 5px;
+            }
+            #wrap > #inner{
+                height: 100%;
+            }
+            #wrap > #inner > img{
+                position: absolute;
+                left: 0px;
+                top: 0px;
+                border-radius: 50%;
+                margin: 4px;
+            }
+            #wrap > #home{
+                position: absolute;
+                left:0px;
+                top: 0px;
+                height: 100%;
+                width: 100%;
+                border-radius: 50%;
+                background: url(img/home.png);
+                transition: 1s;
+            }
+        </style>
+    </head>
+    <body>
+        <div id="wrap">
+            <div id="inner">
+                <img src="img/clos.png" alt="">
+                <img src="img/full.png" alt="">
+                <img src="img/open.png" alt="">
+                <img src="img/prev.png" alt="">
+                <img src="img/refresh.png" alt="">
+            </div>
+            <div id="home"></div>
+        </div>
+    </body>
+    <script>
+        var home = document.querySelector("#wrap > #home");
+        var flag = false;
+        var imgs = document.querySelectorAll("#wrap > #inner > img");
+        var c = 140;
+        home.onclick = function() {
+            flag = !flag;
+            if(flag) {
+                this.style.transform = "rotate(-720deg)"
+                for(var i = 0; i < imgs.length; i++) {
+                    imgs[i].style.transition = 1 + "s " + i * 0.15+"s";
+                    imgs[i].style.left = -getPoint(c, i*90/(imgs.length-1)).left + "px";
+                    imgs[i].style.top = -getPoint(c, i*90/(imgs.length-1)).top + "px";
+                    imgs[i].style.transform = "rotate(-720deg) scale(1)";
+                }
+            }else{
+                this.style.transform = "rotate(0deg)"
+                for(var i = 0; i < imgs.length; i++) {
+                    imgs[i].style.transition = 1+ "s " + (imgs.length -1 - i) * 0.15+"s";
+                    imgs[i].style.left = 0 +"px";
+                    imgs[i].style.top =  0 +"px";
+                    imgs[i].style.transform = "rotate(0deg) scale(1)";
+                }
+            }
+        }
+
+        function getPoint(c, deg) {
+            var x = Math.round(c  * Math.sin(deg * Math.PI/180));
+            var y = Math.round(c  * Math.cos(deg * Math.PI/180));
+            return {left: x, top: y};
+        }
+
+        function fn() {
+            this.style.transition = 0.3 + "s ";
+            this.style.transform = "rotate(-720deg) scale(1)";
+            this.style.opacity = 1;
+            this.removeEventListener("transitionend", fn);
+        }
+        // 点击放大功能部分
+        for(var i = 0; i < imgs.length; i++) {
+            imgs[i].onclick = function() {
+                this.style.transform = "rotate(-720deg) scale(2)";
+                this.style.opacity = 0.1;
+                this.style.transition = 0.5 + "s ";
+                this.addEventListener("transitionend", fn);
+            }
+        }
+    </script>
+</html>
